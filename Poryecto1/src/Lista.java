@@ -120,3 +120,103 @@ public class Lista {
             aux = aux.getSiguiente();
         }
     }
+public void buscarApellido(String apellido) {
+        Nodo aux = inicio;
+        while (aux != null) {
+            if (aux.getPersona().getApellido().compareTo(apellido) == 0) {
+                System.out.println(aux.getPersona().toString());
+            }
+            aux = aux.getSiguiente();
+        }
+    }
+    public void buscarDatos(int num1, int num2, Estudiantes obj) {
+        Nodo aux = inicio;
+        Nodo siguiente;
+        if (inicio == fin) {
+            System.out.println("No puedo buscar solo existe un nodo");
+        } else {
+            while (aux != null) {
+                if (aux.getPersona().getMatricula() == num1) {
+                    siguiente = aux.getSiguiente();
+                    if (siguiente != null) {
+                        if (siguiente.getPersona().getMatricula() == num2) {
+                            insertarLista(aux, siguiente, obj);
+                            return;
+                        } else {
+                            System.out.println("Matricula 2 no existe como dato predecesor");
+                        }
+                    } else {
+                        System.out.println("No se puede comprobar matricula 2");
+                    }
+                }
+                aux = aux.getSiguiente();
+            }
+        }
+    }
+    public void reescribirArchivo() {
+        BufferedWriter bw;
+        PrintWriter wr;
+        try {
+            File archivo = new File("Estudiante.txt");
+            FileWriter escribir = new FileWriter(archivo, false);
+            bw = new BufferedWriter(escribir);
+            wr = new PrintWriter(bw);
+            // wr.println();
+            wr.println();
+            bw.close();
+        } catch (Exception e) {
+            System.out.println("Error al escribir");
+        }
+    }
+    public void ingresarDatos(String estudiante) {
+        BufferedWriter bw;
+        PrintWriter wr;
+        try {
+            File archivo = new File("Estudiante.txt");
+            FileWriter escribir = new FileWriter(archivo, true);
+           
+            bw = new BufferedWriter(escribir);
+            wr = new PrintWriter(bw);
+            //System.out.println("Nombre\tApellido\tMatricula\tCedula");
+            // wr.println();
+            wr.println(estudiante);
+            bw.close();
+        } catch (Exception e) {
+            System.out.println("Error al escribir");
+        }
+    }
+    public String[] leerDatos() throws FileNotFoundException, IOException {
+        String[] filas = new String[400];
+        int contador = 0;
+        String linea;
+        File archivo = new File("Estudiante.txt"); //el lugar donde esta el archivo
+        FileReader fr = new FileReader(archivo); //el objeto que va a ser leido
+        BufferedReader br = new BufferedReader(fr); //lee el texto
+        
+        while ((linea = br.readLine()) != null) {//mientras haya lineas para leer            
+            //System.out.println(linea);
+            filas[contador] = linea;
+            //System.out.println(contador);
+            contador++;
+        }
+        return filas;
+    }
+       public void ingresarTodosLosNodos() {
+        Nodo aux = inicio;
+        String nombre;
+        String apellido;
+        int matricula;
+        int cedula;
+        while (aux != null) {
+            nombre = aux.getPersona().getNombre();
+            apellido = aux.getPersona().getApellido();
+            matricula = aux.getPersona().getMatricula();
+            cedula = aux.getPersona().getCedula();
+            
+           ingresarDatos(nombre+" "+apellido+" "+matricula+" "+cedula);
+                        
+            aux = aux.getSiguiente();
+        }
+    }
+    
+}
