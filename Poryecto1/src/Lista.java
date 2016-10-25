@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoprogreso1;
+package proyecto;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -25,8 +25,13 @@ public class Lista {
     }
 // 
     //************INSERTAR AL INICIO******************
-    public void insertarInicio(Estudiantes obj) {
-        Nodo nuevo = new Nodo(obj, inicio);
+    public void insertarInicio(Object obj) {
+        Nodo nuevo;
+        if(new Docentes().getClass()==obj.getClass()){
+            nuevo = new Nodo((Docentes) obj, inicio);
+        }else{
+            nuevo=new Nodo((Estudiantes) obj, inicio);
+        }
         inicio = nuevo;
         if (fin == null) {
             fin = nuevo;
@@ -34,8 +39,13 @@ public class Lista {
     }
       
     //************INSERTAR AL FIN******************
-    public void insertarFin(Estudiantes obj) {
-        Nodo nuevo = new Nodo(obj, null);
+    public void insertarFin(Object obj) {
+        Nodo nuevo;
+        if(new Docentes().getClass()==obj.getClass()){
+            nuevo = new Nodo((Docentes) obj, inicio);
+        }else{
+            nuevo=new Nodo((Estudiantes) obj, inicio);
+        }
         if (inicio == null) {
             inicio = nuevo;
             fin = nuevo;
@@ -44,9 +54,13 @@ public class Lista {
             fin = nuevo;
         }
     }
-    public Lista insertarLista(Nodo anterior, Nodo siguiente, Estudiantes obj) {
+    public Lista insertarLista(Nodo anterior, Nodo siguiente, Object obj) {
         Nodo nuevo;
-        nuevo = new Nodo(obj);
+        if(new Docentes().getClass()==obj.getClass()){
+            nuevo = new Nodo((Docentes) obj, inicio);
+        }else{
+            nuevo=new Nodo((Estudiantes) obj, inicio);
+        }
         nuevo.setSiguiente(siguiente);
         anterior.setSiguiente(nuevo);
         return this;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoprogreso1;
+package proyecto;
 
 
 /**
@@ -13,18 +13,30 @@ package proyectoprogreso1;
 public class Nodo {
     
     private Estudiantes persona; 
+    private Docentes docente;
     private Nodo siguiente; 
     
       public Nodo(Estudiantes persona) {
         this.persona = persona;
         this.siguiente=null;
     }
+    
 
     public Nodo(Estudiantes persona, Nodo siguiente) {
         this.persona = persona;
         this.siguiente = siguiente;
     }
 
+    public Nodo(Docentes docente, Nodo siguiente) {
+        this.docente = docente;
+        this.siguiente = siguiente;
+    }
+
+    public Nodo(Docentes docente) {
+        this.docente = docente;
+        siguiente=null;
+    }
+    
     public Estudiantes getPersona() {
         return persona;
     }
